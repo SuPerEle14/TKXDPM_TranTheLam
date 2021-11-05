@@ -20,17 +20,17 @@
             <Font name="Arial Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="289.0" layoutY="242.0" text="PAYMENT RESULT!" textFill="#15ff00">
+      <Label layoutX="372.0" layoutY="247.0" text="PAYMENT RESULT!" textFill="#15ff00">
          <font>
             <Font name="Arial Bold" size="48.0" />
          </font>
       </Label>
-      <Label layoutX="468.0" layoutY="398.0" text="Message">
+      <Label layoutX="550.0" layoutY="396.0" text="Message">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="417.0" layoutY="574.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="225.0" style="-fx-background-color: red;" text="OK" textFill="WHITE">
+      <Button layoutX="486.0" layoutY="563.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="226.0" style="-fx-background-color: red;" text="OK" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>

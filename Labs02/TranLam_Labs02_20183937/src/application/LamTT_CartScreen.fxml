@@ -51,7 +51,8 @@
                               <Font name="Calibri" size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="208.0" layoutY="126.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="126.0" style="-fx-border-color: #19b4e8;" text="Delete" />
+                        <Button layoutX="208.0" layoutY="126.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" style="-fx-border-color: #19b4e8;" text="Delete" />
+                        <Button layoutX="317.0" layoutY="126.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="91.0" style="-fx-background-color: Green;" text="Rush Order" textFill="#dcd0d0" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
