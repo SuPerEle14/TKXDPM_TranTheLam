@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import entity.cart.Cart;
 import entity.cart.CartMedia;
@@ -83,13 +85,35 @@ public class PlaceOrderController extends BaseController{
     }
     
     public boolean validatePhoneNumber(String phoneNumber) {
-    	// TODO: your work
-    	return false;
+    	// Trần Thế Lâm - 20183937
+    	// check the phone number has 10 digits
+    	if (phoneNumber.length() != 10) return false;
+    	
+    	// check the phone number start with 
+    	if (!phoneNumber.startsWith("0")) return false;
+    	
+    	try {
+    		Integer.parseInt(phoneNumber);
+    	} catch (NumberFormatException e) {
+    		return false;
+    	}
+    	return true;
     }
     
     public boolean validateName(String name) {
-    	// TODO: your work
-    	return false;
+    	
+    	// Check special_character
+    	
+    	Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    	Matcher m = p.matcher(name);
+    	boolean hasSpecialChar = m.find();
+    	
+    	if (hasSpecialChar) return false;
+    	
+    	// check null   	
+    	if (name == null) return false;
+    	
+    	return true;
     }
     
     public boolean validateAddress(String address) {
