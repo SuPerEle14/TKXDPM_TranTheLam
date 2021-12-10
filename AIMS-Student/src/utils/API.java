@@ -85,6 +85,7 @@ public class API {
 	}
 	/**
 	 * Phương thức này giúp gọi đến các api dạng GET
+	 * @author Tran The Lam
 	 * @param url: Đường dẫn đển Server
 	 * @param token: Đoạn mã cần cung cấp để xác thực người dùng
 	 * @return response: Phản hồi từ Server
@@ -102,6 +103,7 @@ public class API {
 
 	/**
 	 * Phuong thuc giup goi cac api dan POST (thanh toan, ...)
+	 * @author Tran The Lam
 	 * @param url: duong dan toi server can request
 	 * @param data: du lieu dua len server de xu ly (dang JSON)
 	 * @return response: phan hoi tu server (dang String)

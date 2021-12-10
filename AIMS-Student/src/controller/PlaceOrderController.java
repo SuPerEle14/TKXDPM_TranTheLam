@@ -29,7 +29,7 @@ public class PlaceOrderController extends BaseController{
     private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
 
     /**
-     * This method checks the avalibility of product when user click PlaceOrder button
+     * This method checks the availability of product when user click PlaceOrder button
      * @throws SQLException
      */
     public void placeOrder() throws SQLException{
@@ -130,6 +130,7 @@ public class PlaceOrderController extends BaseController{
     	return true;
     }
     
+    
 
     /**
      * This method calculates the shipping fees of order
@@ -137,9 +138,18 @@ public class PlaceOrderController extends BaseController{
      * @return shippingFee
      */
     public int calculateShippingFee(Order order){
+    	// Hang Hoa gia tri cao duoc Free Ship
+    	if(order.getAmount() > 1000000)
+        	return 0;
+    	
+    	
         Random rand = new Random();
-        int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );
+        int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount());
         LOGGER.info("Order Amount: " + order.getAmount() + " -- Shipping Fees: " + fees);
         return fees;
+    }
+    
+    public int calculateRushOrderShippingFee(Order order) {
+    	return 200;
     }
 }

@@ -27,11 +27,12 @@ public class Media {
     protected int quantity;
     protected String type;
     protected String imageURL;
+    protected Boolean spRushOrder; // support Rush Order
 
     public Media() throws SQLException{
         stm = AIMSDB.getConnection().createStatement();
     }
-
+    
     public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
         this.id = id;
         this.title = title;
@@ -39,6 +40,18 @@ public class Media {
         this.price = price;
         this.quantity = quantity;
         this.type = type;
+
+        //stm = AIMSDB.getConnection().createStatement();
+    }
+
+    public Media (int id, String title, String category, int price, int quantity, String type, Boolean spRushOrder) throws SQLException{
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.price = price;
+        this.quantity = quantity;
+        this.type = type;
+        this.spRushOrder = spRushOrder;
 
         //stm = AIMSDB.getConnection().createStatement();
     }
@@ -62,9 +75,10 @@ public class Media {
                 .setCategory(res.getString("category"))
                 .setMediaURL(res.getString("imageUrl"))
                 .setPrice(res.getInt("price"))
-                .setType(res.getString("type"));
+                .setType(res.getString("type"))
+            	.setSupportRushOrder(this.getBoolean());
         }
-        return null;
+        return new Media();
     }
 
     public List getAllMedia() throws SQLException{
@@ -79,7 +93,8 @@ public class Media {
                 .setCategory(res.getString("category"))
                 .setMediaURL(res.getString("imageUrl"))
                 .setPrice(res.getInt("price"))
-                .setType(res.getString("type"));
+                .setType(res.getString("type"))
+            	.setSupportRushOrder(getBoolean());
             medium.add(media);
         }
         return medium;
@@ -154,6 +169,24 @@ public class Media {
         this.type = type;
         return this;
     }
+    
+    public Boolean getSupportRushOrder() {
+		return spRushOrder;
+	}
+
+	public Media setSupportRushOrder(Boolean spRushOrder) {
+		
+		this.spRushOrder = spRushOrder;
+		return this;
+	}
+	
+	/**
+     * Thêm giao hàng nhanh cho sản phẩm
+     * @return mặc định false
+     */
+    public boolean getBoolean() {
+    	return false;
+    }
 
     @Override
     public String toString() {
@@ -165,6 +198,7 @@ public class Media {
             ", quantity='" + quantity + "'" +
             ", type='" + type + "'" +
             ", imageURL='" + imageURL + "'" +
+            ", spRushOrder='" + spRushOrder + "'" +
             "}";
     }    
 

@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
@@ -54,6 +55,9 @@ public class MediaHandler extends FXMLScreenHandler {
 
 	@FXML
 	protected Button btnDelete;
+	
+	@FXML
+	protected RadioButton rbtnRushOrder;
 
 	private CartMedia cartMedia;
 	private Spinner<Integer> spinner;
@@ -92,6 +96,11 @@ public class MediaHandler extends FXMLScreenHandler {
 				throw new ViewCartException();
 			}
 		});
+		
+		// add Radio Button to choose Rush Order
+		if (rbtnRushOrder.isSelected()) {
+			cartMedia.getMedia().setSupportRushOrder(true);
+		}
 
 		initializeSpinner();
 	}
@@ -118,7 +127,7 @@ public class MediaHandler extends FXMLScreenHandler {
 				// update the total of mediaCart
 				price.setText(Utils.getCurrencyFormat(numOfProd*cartMedia.getPrice()));
 
-				// update subtotal and amount of Cart
+				// update sub total and amount of Cart
 				cartScreen.updateCartAmount();
 
 			} catch (SQLException e1) {

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import controller.PlaceOrderController;
+import controller.PlaceRushOrderController;
 import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
 import entity.order.Order;
@@ -61,18 +62,15 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
             }
         });
 		this.province.getItems().addAll(Configs.PROVINCES);
+		this.province.setValue("Hà Nội");
 	}
 
 	@FXML
 	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
 
 		// add info to messages
-		HashMap messages = new HashMap<>();
-		messages.put("name", name.getText());
-		messages.put("phone", phone.getText());
-		messages.put("address", address.getText());
-		messages.put("instructions", instructions.getText());
-		messages.put("province", province.getValue());
+		HashMap<String, String> messages = addInfoToMessages();
+				
 		try {
 			// process and validate delivery info
 			getBController().processDeliveryInfo(messages);
@@ -81,22 +79,47 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 		}
 	
 		// calculate shipping fees
-		int shippingFees = getBController().calculateShippingFee(order);
-		order.setShippingFees(shippingFees);
-		order.setDeliveryInfo(messages);
+		calculateShippingFees(messages);
 		
 		// create invoice screen
+		createInvoiceScreen();
+		
+		return;
+	}
+
+	public PlaceOrderController getBController(){
+		return (PlaceOrderController) super.getBController();
+	}
+	
+	public HashMap<String, String> addInfoToMessages() throws IOException, SQLException, InterruptedException {
+		HashMap<String, String> messages = new HashMap<>();
+		messages.put("name", name.getText());
+		messages.put("phone", phone.getText());
+		messages.put("address", address.getText());
+		messages.put("instructions", instructions.getText());
+		messages.put("province", province.getValue());
+		return messages;
+	}
+	
+	public void calculateShippingFees(HashMap<String, String> messages) {
+		// calculate shipping fees
+		int shippingFees = getBController().calculateShippingFee(order);
+		int rushOrderFees = getBController().calculateRushOrderShippingFee(order);
+		order.setRushOrderFees(rushOrderFees);
+		order.setShippingFees(shippingFees);
+		order.setDeliveryInfo(messages);
+	}
+	
+	public void createInvoiceScreen() throws IOException {
+		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
-		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
+		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH,
+				invoice);
 		InvoiceScreenHandler.setPreviousScreen(this);
 		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
 		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
 		InvoiceScreenHandler.setBController(getBController());
 		InvoiceScreenHandler.show();
-	}
-
-	public PlaceOrderController getBController(){
-		return (PlaceOrderController) super.getBController();
 	}
 
 	public void notifyError(){

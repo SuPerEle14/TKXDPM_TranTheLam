@@ -9,6 +9,7 @@ import utils.Configs;
 public class Order {
     
     private int shippingFees;
+    private int rushOrderFees;
     private List lstOrderMedia;
     private HashMap<String, String> deliveryInfo;
 
@@ -43,6 +44,14 @@ public class Order {
     public int getShippingFees() {
         return shippingFees;
     }
+    
+    public void setRushOrderFees(int rushOrderFees) {
+        this.rushOrderFees = rushOrderFees;
+    }
+
+    public int getRushOrderFees() {
+        return rushOrderFees;
+    }
 
     public HashMap getDeliveryInfo() {
         return deliveryInfo;
@@ -56,7 +65,7 @@ public class Order {
         double amount = 0;
         for (Object object : lstOrderMedia) {
             OrderMedia om = (OrderMedia) object;
-            amount += om.getPrice();
+            amount += om.getPrice() * om.getQuantity(); // Fix: Tien = Gia * So luong san pham
         }
         return (int) (amount + (Configs.PERCENT_VAT/100)*amount);
     }

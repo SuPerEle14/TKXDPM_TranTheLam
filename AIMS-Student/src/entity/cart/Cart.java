@@ -72,5 +72,17 @@ public class Cart {
         }
         return null;
     }
+    
+    public boolean checkRushProduct(){
+ //   	boolean avaiRushOrd = true;
+ //   	 if (!avaiRushOrd) throw new MediaNotAvailableException("This media not available");
+    	
+    	for (Object obj : lstCartMedia) {
+            CartMedia cm = (CartMedia) obj;
+        }
+    	
+    	return true;
+    	
+    }
 
 }

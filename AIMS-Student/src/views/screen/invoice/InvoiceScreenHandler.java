@@ -54,6 +54,10 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private VBox vboxItems;
+	
+	// Rush Order Shipping Fees
+	@FXML
+	private Label rushOrderFees;
 
 	private Invoice invoice;
 
@@ -71,7 +75,9 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		address.setText(deliveryInfo.get("address"));
 		subtotal.setText(Utils.getCurrencyFormat(invoice.getOrder().getAmount()));
 		shippingFees.setText(Utils.getCurrencyFormat(invoice.getOrder().getShippingFees()));
-		int amount = invoice.getOrder().getAmount() + invoice.getOrder().getShippingFees();
+		rushOrderFees.setText(Utils.getCurrencyFormat(invoice.getOrder().getRushOrderFees()));
+		int amount = invoice.getOrder().getAmount() + invoice.getOrder().getShippingFees()
+				+ invoice.getOrder().getRushOrderFees();
 		total.setText(Utils.getCurrencyFormat(amount));
 		invoice.setAmount(amount);
 		invoice.getOrder().getlstOrderMedia().forEach(orderMedia -> {
