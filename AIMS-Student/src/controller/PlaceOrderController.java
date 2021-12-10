@@ -101,24 +101,33 @@ public class PlaceOrderController extends BaseController{
     }
     
     public boolean validateName(String name) {
+    	// Trần Thế Lâm - 20183937
+    	// check null   	
+    	if (name == null) return false;
     	
     	// Check special_character
-    	
-    	Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    	Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
     	Matcher m = p.matcher(name);
     	boolean hasSpecialChar = m.find();
     	
     	if (hasSpecialChar) return false;
     	
-    	// check null   	
-    	if (name == null) return false;
-    	
     	return true;
     }
     
     public boolean validateAddress(String address) {
-    	// TODO: your work
-    	return false;
+    	// Trần Thế Lâm - 20183937
+    	// check null   	
+    	if (address == null) return false;
+    	
+    	// Check special_character
+    	Pattern p = Pattern.compile("[^\s a-zA-Z0-9 ]", Pattern.CASE_INSENSITIVE);
+    	Matcher m = p.matcher(address);
+    	boolean hasSpecialChar = m.find();
+    	
+    	if (hasSpecialChar) return false;
+    	
+    	return true;
     }
     
 
