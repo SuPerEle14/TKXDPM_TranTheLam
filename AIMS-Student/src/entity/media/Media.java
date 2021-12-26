@@ -28,13 +28,12 @@ public class Media {
     protected String type;
     protected String imageURL;
     
+    // Tran The Lam
     // size of item
 	protected int itemLength;
 	protected int itemWidth;
 	protected int itemWeight;
-    
-    
-    
+      
     protected Boolean spRushOrder; // support Rush Order
 
     public Media() throws SQLException{
@@ -239,6 +238,9 @@ public class Media {
             ", quantity='" + quantity + "'" +
             ", type='" + type + "'" +
             ", imageURL='" + imageURL + "'" +
+            ", itemLength='" + itemLength + "'" +
+            ", itemWidth='" + itemWidth + "'" +
+            ", itemWeight='" + itemWeight + "'" +
             ", spRushOrder='" + spRushOrder + "'" +
             "}";
     }    

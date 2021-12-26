@@ -52,7 +52,7 @@ public class API {
 		HttpURLConnection conn = (HttpURLConnection) line_api_url.openConnection();
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
-		conn.setRequestMethod("GET"); // phương thức request là GET
+		conn.setRequestMethod(method); 
 		conn.setRequestProperty("Content-Type", "application/json");
 		conn.setRequestProperty("Authorization", "Bearer " + token);
 		return conn;

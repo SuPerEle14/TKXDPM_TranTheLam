@@ -7,7 +7,7 @@ import entity.order.Order;
 import entity.order.OrderMedia;
 
 public class CalculateRushOrderShippingFees implements ShippingFeeCalculator {
-	
+	// Tran The Lam
 	private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
 
 	@Override
