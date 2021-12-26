@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import entity.order.OrderMedia;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +40,10 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
 
     @FXML
     private Label price;
+    
+    // check Rush
+    @FXML
+    private CheckBox checkRush;
 
     private OrderMedia orderMedia;
 
@@ -55,6 +60,7 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
         title.setText(orderMedia.getMedia().getTitle());
         price.setText(Utils.getCurrencyFormat(orderMedia.getPrice()));
         numOfProd.setText(String.valueOf(orderMedia.getQuantity()));
+        checkRush.setSelected(orderMedia.getCheckRush());
         setImage(image, orderMedia.getMedia().getImageURL());
 		image.setPreserveRatio(false);
 		image.setFitHeight(90);

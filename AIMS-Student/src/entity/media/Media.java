@@ -27,6 +27,14 @@ public class Media {
     protected int quantity;
     protected String type;
     protected String imageURL;
+    
+    // size of item
+	protected int itemLength;
+	protected int itemWidth;
+	protected int itemWeight;
+    
+    
+    
     protected Boolean spRushOrder; // support Rush Order
 
     public Media() throws SQLException{
@@ -44,13 +52,17 @@ public class Media {
         //stm = AIMSDB.getConnection().createStatement();
     }
 
-    public Media (int id, String title, String category, int price, int quantity, String type, Boolean spRushOrder) throws SQLException{
+    public Media (int id, String title, String category, int price, int quantity, String type, int itemLength, int itemWidth, int itemWeight, Boolean spRushOrder) throws SQLException{
         this.id = id;
         this.title = title;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
         this.type = type;
+        this.itemLength = itemLength;
+        this.itemWidth = itemWidth;
+        this.itemWeight = itemWeight;
+        
         this.spRushOrder = spRushOrder;
 
         //stm = AIMSDB.getConnection().createStatement();
@@ -169,6 +181,35 @@ public class Media {
         this.type = type;
         return this;
     }
+    
+    // Length, Width, Weight - Getter, Setter for item
+    public int getLength() {
+        return this.itemLength;
+    }
+
+    public Media setLength(int itemLength) {
+        this.itemLength = itemLength;
+        return this;
+    }
+    
+    public int getWidth() {
+        return this.itemWidth;
+    }
+
+    public Media setWidth(int itemWidth) {
+        this.itemWidth = itemWidth;
+        return this;
+    }
+    
+    public int getWeight() {
+        return this.itemWeight;
+    }
+
+    public Media setWeight(int itemWeight) {
+        this.itemWeight = itemWeight;
+        return this;
+    }
+    
     
     public Boolean getSupportRushOrder() {
 		return spRushOrder;

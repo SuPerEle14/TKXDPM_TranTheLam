@@ -16,6 +16,9 @@ import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.order.OrderMedia;
 import views.screen.popup.PopupScreen;
+import shippingfees.CalculateRushOrderShippingFees;
+import shippingfees.CalculateShippingFees;
+import shippingfees.ShippingFeeCalculator;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
@@ -27,6 +30,13 @@ public class PlaceOrderController extends BaseController{
      * Just for logging purpose
      */
     private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+    
+    /**
+     * Shipping Fees
+     */
+    
+    private ShippingFeeCalculator calculateShippingFee = new CalculateShippingFees();
+    private ShippingFeeCalculator calculateRushOrderShippingFee = new CalculateRushOrderShippingFees();
 
     /**
      * This method checks the availability of product when user click PlaceOrder button
@@ -47,7 +57,9 @@ public class PlaceOrderController extends BaseController{
             CartMedia cartMedia = (CartMedia) object;
             OrderMedia orderMedia = new OrderMedia(cartMedia.getMedia(), 
                                                    cartMedia.getQuantity(), 
-                                                   cartMedia.getPrice());    
+                                                   cartMedia.getPrice(),
+                                                   cartMedia.getRushOrder());        										
+            		                                 
             order.getlstOrderMedia().add(orderMedia);
         }
         return order;
@@ -105,6 +117,11 @@ public class PlaceOrderController extends BaseController{
     	// check null   	
     	if (name == null) return false;
     	
+    	// check null character
+    	if(name.split(" ").length >5){
+            return false;
+        }
+    	
     	// Check special_character
     	Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
     	Matcher m = p.matcher(name);
@@ -131,12 +148,26 @@ public class PlaceOrderController extends BaseController{
     }
     
     
-
     /**
      * This method calculates the shipping fees of order
      * @param order
      * @return shippingFee
      */
+    public int calculateShippingFee(Order order){
+        return calculateShippingFee.calculateShippingFees(order);
+    }
+    
+    
+    /**
+     * This method calculates Rush Order shipping fees of order
+     * @param order
+     * @return shippingFee
+     */
+    public int calculateRushOrderShippingFee(Order order){
+        return calculateRushOrderShippingFee.calculateShippingFees(order);
+    }
+    
+/*    
     public int calculateShippingFee(Order order){
     	// Hang Hoa gia tri cao duoc Free Ship
     	if(order.getAmount() > 1000000)
@@ -150,6 +181,32 @@ public class PlaceOrderController extends BaseController{
     }
     
     public int calculateRushOrderShippingFee(Order order) {
-    	return 200;
+    	int k = order.getlstOrderMedia().size();
+    	int numOfRush = 0;
+    	for (int i = 0; i < k; i++) {
+    		OrderMedia ordMedia = (OrderMedia) order.getlstOrderMedia().get(i);
+    		if (ordMedia.getCheckRush()) numOfRush++; // Tinh so san pham chon Phuong Thuc Rush Order
+    		
+    	}
+    	LOGGER.info("Number of Item choose Rush Order:" + order.getRushOrderFees());
+    	
+    	// Moi loai mat hang su dung Rush Order se tinh 2000đ
+    	return numOfRush * 2000;
     }
+    
+    public int calculateNewShippingFees(Order order) {
+    	int fees = 0;
+    	
+    	int k = order.getlstOrderMedia().size();
+    	int numOfRush = 0;
+    	for (int i = 0; i < k; i++) {
+    		OrderMedia ordMedia = (OrderMedia) order.getlstOrderMedia().get(i);
+    		int iLength, iWidth, iWeight;
+    		ordMedia.getMedia().getLength(); 
+    		
+    	}
+    	return fees;
+    }
+*/    
+
 }

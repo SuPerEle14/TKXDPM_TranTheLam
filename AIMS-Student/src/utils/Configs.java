@@ -36,6 +36,7 @@ public class Configs {
 
 	public static String CURRENCY = "VND";
 	public static float PERCENT_VAT = 10;
+	public static float CONTANTS = 6000;
 
 	// static resource
 	public static final String IMAGE_PATH = "assets/images";

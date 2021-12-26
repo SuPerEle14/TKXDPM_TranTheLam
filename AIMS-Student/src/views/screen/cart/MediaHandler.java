@@ -10,6 +10,8 @@ import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -56,6 +58,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	@FXML
 	protected Button btnDelete;
 	
+	// Rush order
 	@FXML
 	protected RadioButton rbtnRushOrder;
 
@@ -97,11 +100,19 @@ public class MediaHandler extends FXMLScreenHandler {
 			}
 		});
 		
-		// add Radio Button to choose Rush Order
-		if (rbtnRushOrder.isSelected()) {
-			cartMedia.getMedia().setSupportRushOrder(true);
-		}
-
+		// add Radio Button to choose Rush Order	
+		rbtnRushOrder.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if (rbtnRushOrder.isSelected()) {
+					cartMedia.setRushOrder(true);
+					LOGGER.info("Choose Rush Order:" + cartMedia.getRushOrder());
+				}
+			}
+		});
+		
 		initializeSpinner();
 	}
 

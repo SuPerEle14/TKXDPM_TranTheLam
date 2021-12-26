@@ -136,7 +136,7 @@ public class PlaceRushOrderController extends PlaceOrderController {
 	/**
      * this method check rush order for user address
      * if the province is Ha Noi => true
-     * @param probince : Tinh
+     * @param province : Tinh
      * @return
      */
     public boolean validateProvince(String province){
@@ -145,12 +145,14 @@ public class PlaceRushOrderController extends PlaceOrderController {
 		else
 			return false;
     }
+
     
     /**
      * This method calculates the shipping fees of Rush order
      * @param order
      * @return shippingFee
      */
+    /*
     @Override
     public int calculateRushOrderShippingFee(Order order){
 //        int totalFees = super.calculateShippingFee(order);
@@ -170,5 +172,5 @@ public class PlaceRushOrderController extends PlaceOrderController {
 //		order.setRushOrderFees(rushOrderFees);
 		return rushOrderFees;
 	}
-    
+*/   
 }
